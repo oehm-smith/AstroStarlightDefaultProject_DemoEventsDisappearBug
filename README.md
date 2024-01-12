@@ -1,3 +1,34 @@
+# Astro Starlight Bug
+
+When ViewTransitions are added to make an SPA, events on HTML elements disappear after new page is navigated to.
+
+## Instructions
+
+### Bug
+Before making the below Mod, test this bug to show that ViewTransitions cause the problem
+* On the Guides > Example Guide page is a button.  Click on it and an alert displays
+* Ctrl / Cmd + Shift + C click on the button and under Elements > Event Listeners tab in Developer tools you will observe there is a click handler
+
+After making the change described below:
+* The Alert no longer works
+* The Event Listener no longer exists
+
+### View Transitions mod
+
+Add view transitions as per this PR - https://github.com/withastro/starlight/pull/694 - don't worry about the config.  So do this:
+* Edit node_modules/@astrojs/starlight/components/Page.astro and add:
+```astro
+import { ViewTransitions } from 'astro:transitions';  // Amongst other imports
+...
+<ViewTransitions /> before "</head>"
+```
+
+This turns on ViewTransitions across the board creating the SPA app.
+
+
+----
+Original README below
+
 # Starlight Starter Kit: Basics
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
